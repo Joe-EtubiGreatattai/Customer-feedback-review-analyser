@@ -26,10 +26,13 @@ function displayReviews(reviews) {
     if (reviews.length > existingReviewsCount) {
         for (var i = existingReviewsCount; i < reviews.length; i++) {
             var reviewItem = document.createElement('li');
-            reviewItem.textContent = reviews[i].header + ': ' + reviews[i].text;
+            reviewItem.innerHTML = "<b>" + reviews[i].header + "</b> " + '</br>' + reviews[i].text;
             reviewsList.appendChild(reviewItem);
         }
         displaySuccessMessage('New reviews have been added.');
+
+        var totalReviews = document.getElementById('totalReviews');
+        totalReviews.textContent = 'Total Reviews: ' + reviews.length;
     } else {
         displaySuccessMessage('No new reviews found.');
     }
@@ -38,8 +41,11 @@ function displayReviews(reviews) {
 function displayProductInfo(productName, imageUrl) {
     var productNameElement = document.getElementById('productName');
     var productImageElement = document.getElementById('productImage');
+    var nxtensiontitle = document.getElementById('nxtensiontitle');
     productNameElement.textContent = productName;
     productImageElement.src = imageUrl;
+    productImageElement.style.display = 'block';
+    nxtensiontitle.style.display = 'none';
 }
 
 function displayErrorMessage(message) {
