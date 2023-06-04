@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+    "name": "Jumia Reviews",
+    "version": "1.0",
+    "description": "Scrapes and displays reviews from Jumia product page.",
+    "permissions": [
+        "activeTab",
+        "https://www.jumia.com.ng/*"
+    ],
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": "icon.png"
+    }
+}
