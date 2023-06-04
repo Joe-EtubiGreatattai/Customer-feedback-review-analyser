@@ -52,13 +52,39 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             color: #333333;
         }
+        
+        .product-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .product-info img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .product-info h2 {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        .error-message {
+            text-align: center;
+            margin-top: 20px;
+            color: #ff0000;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Jumia Reviews</h1>
+    <div class="product-info">
+        <img id="productImage" src="" alt="Product Image">
+        <h2 id="productName"></h2>
+    </div>
+    <h1>Jumia Reviews Scapping Tool</h1>
     <button id="scrapeButton">Scrape Reviews</button>
     <ul id="reviewsList"></ul>
+    <p id="errorMessage" class="error-message"></p>
     <script src="popup.js"></script>
 </body>
 
