@@ -29,20 +29,6 @@ function getProductInfo() {
     return productInfo;
 }
 
-function saveReviewsToFile(reviews, productName) {
-    var textToSave = reviews.map(function(review) {
-        return review.header + '\n' + review.text + '\n\n';
-    }).join('');
-
-    var blob = new Blob([textToSave], { type: 'text/plain' });
-    var fileName = 'reviews/' + productName + '.txt';
-
-    var link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = fileName;
-    link.click();
-}
-
 var scrapedReviews = scrapeReviews();
 var productInfo = getProductInfo();
 
@@ -51,7 +37,7 @@ if (productInfo.productName === '') {
 } else if (scrapedReviews.length === 0) {
     chrome.runtime.sendMessage({ action: 'displayErrorMessage', message: 'No reviews found for this product.' });
 } else {
-    saveReviewsToFile(scrapedReviews, productInfo.productName);
     chrome.runtime.sendMessage({ action: 'displayReviews', reviews: scrapedReviews });
     chrome.runtime.sendMessage({ action: 'displayProductInfo', productName: productInfo.productName, imageUrl: productInfo.imageUrl });
+    chrome.runtime.sendMessage({ action: 'saveReviewsAsJson', reviews: scrapedReviews, productName: productInfo.productName });
 }

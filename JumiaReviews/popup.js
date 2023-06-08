@@ -59,6 +59,19 @@ function displaySuccessMessage(message) {
     errorMessage.textContent = message;
 }
 
+function saveReviewsAsJson(reviews, productName) {
+    var filename = productName.replace(/[^\w\s]/gi, '') + '.json';
+    var reviewsData = JSON.stringify(reviews, null, 2);
+
+    var blob = new Blob([reviewsData], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+
+    chrome.downloads.download({
+        url: url,
+        filename: 'reviews/' + filename
+    });
+}
+
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.action === 'displayReviews') {
         displayReviews(request.reviews);
@@ -66,5 +79,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         displayProductInfo(request.productName, request.imageUrl);
     } else if (request.action === 'displayErrorMessage') {
         displayErrorMessage(request.message);
+    } else if (request.action === 'saveReviewsAsJson') {
+        saveReviewsAsJson(request.reviews, request.productName);
     }
 });

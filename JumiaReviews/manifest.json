@@ -4,14 +4,16 @@
     "version": "1.0",
     "description": "Scrapes and displays reviews from Jumia product page.",
     "permissions": [
-        "activeTab",
-        "https://www.jumia.com.ng/*"
+      "activeTab",
+      "https://www.jumia.com.ng/*",
+      "downloads"
     ],
     "browser_action": {
-        "default_popup": "popup.html",
-        "default_icon": "icon.png"
+      "default_popup": "popup.html",
+      "default_icon": "icon.png"
     },
     "web_accessible_resources": [
-        "reviews/*"
+      "reviews/*"
     ]
-}
+  }
+  
