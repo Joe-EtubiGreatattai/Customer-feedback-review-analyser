@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketing Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Marketing Dashboard</h1>
+
+    {% for product in product_reviews %}
+    <div class="product-info">
+      <b>{{ product.product_name }}</b>
+      <p><b>Total Reviews:</b> {{ product.num_reviews }}</p>
+      <p class="positive"><b>Positive Reviews:</b> {{ product.num_positive_reviews }}</p>
+      <p class="negative"><b>Negative Reviews:</b> {{ product.num_negative_reviews }}</p>
+   
+      <p>
+        <b>Overall Sentiment Score</b>: {{ product.sentiment_score }}
+      </p>
+      <p class="{% if product.sentiment_score > 0 %}positive{% elif product.sentiment_score < 0 %}negative{% else %}neutral{% endif %}">
+       <b>
+        {% if product.sentiment_score > 0 %}Positive{% elif product.sentiment_score < 0 %}Negative{% else %}Neutral{% endif %}
+      </b>
+      </p>
+    </div>
+    {% endfor %}
+
+    <div class="chart-container">
+      <img class="chart-img" src="{{ url_for('static', filename='overall_sentiment_chart.png') }}" alt="Sentiment Analysis Chart">
+    </div>
+  </div>
+</body>
+
+</html>
